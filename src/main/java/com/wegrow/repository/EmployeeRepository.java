@@ -1,4 +1,7 @@
 package com.wegrow.repository;
 
-public interface EmployeeRepository {
+import com.wegrow.model.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 }
