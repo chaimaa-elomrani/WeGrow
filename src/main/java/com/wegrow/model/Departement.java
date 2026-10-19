@@ -20,6 +20,9 @@ public class Departement {
     @OneToMany(mappedBy = "departement")
     private List<Employee> employees;
 
+    @Transient
+    private int nombreEmployes;
+
 
     public Departement() {
     }
@@ -53,4 +56,13 @@ public class Departement {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
+
+    public int getNombreEmployes() {
+        return nombreEmployes;
+    }
+
+    public void setNombreEmployes(int nombreEmployes) {
+        this.nombreEmployes = nombreEmployes;
+    }
+
 }
