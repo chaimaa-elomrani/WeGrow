@@ -4,4 +4,5 @@ import com.wegrow.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    long countByDepartement_Id(Long id);
 }
