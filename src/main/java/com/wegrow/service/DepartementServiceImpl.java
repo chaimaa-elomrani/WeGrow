@@ -8,8 +8,8 @@ import java.util.List;
 
 public class DepartementServiceImpl implements DepartementService{
 
-    private DepartementRepository departementRepository ;
-    private  EmployeeRepository employeeRepository;
+    private final DepartementRepository departementRepository ;
+    private final  EmployeeRepository employeeRepository;
 
     public DepartementServiceImpl(DepartementRepository departementRepository , EmployeeRepository employeeRepository) {
         this.departementRepository = departementRepository;
@@ -29,7 +29,7 @@ public class DepartementServiceImpl implements DepartementService{
         List<Departement> departments = departementRepository.findAll();
         for(Departement departement : departments){
             long count = employeeRepository.countByDepartement_Id(departement.getId());
-            departement.setNombreEmployes((int) count);
+            departement.setNombreEmployes(count);
         }
         return departments;
     }

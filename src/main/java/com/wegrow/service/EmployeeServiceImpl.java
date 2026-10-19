@@ -9,8 +9,8 @@ import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService{
 
-    private EmployeeRepository employeeRepository;
-    private DepartementRepository departementRepository;
+    private final EmployeeRepository employeeRepository;
+    private final DepartementRepository departementRepository;
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartementRepository departementRepository) {
         this.employeeRepository = employeeRepository;
@@ -47,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         }
 
         Departement department = departementRepository.findById(departmentId)
-                .orElseThrow(() -> new RuntimeException("makanach"));
+                .orElseThrow(() -> new RuntimeException("makanach depart"));
 
         existingEmployee.setFirstName(employee.getFirstName());
         existingEmployee.setLastName(employee.getLastName());
@@ -61,7 +61,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public void delete(Long id) {
         if (!employeeRepository.existsById(id)){
-            throw new RuntimeException("makaynch");
+            throw new RuntimeException("empl makaynch");
         }
          employeeRepository.deleteById(id);
     }

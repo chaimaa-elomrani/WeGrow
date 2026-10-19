@@ -21,7 +21,7 @@ public class Departement {
     private List<Employee> employees;
 
     @Transient
-    private int nombreEmployes;
+    private long  nombreEmployes;
 
 
     public Departement() {
@@ -61,7 +61,7 @@ public class Departement {
         return nombreEmployes;
     }
 
-    public void setNombreEmployes(int nombreEmployes) {
+    public void setNombreEmployes(long nombreEmployes) {
         this.nombreEmployes = nombreEmployes;
     }
 
