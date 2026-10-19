@@ -57,7 +57,7 @@ public class Departement {
         this.employees = employees;
     }
 
-    public int getNombreEmployes() {
+    public long getNombreEmployes() {
         return nombreEmployes;
     }
 
