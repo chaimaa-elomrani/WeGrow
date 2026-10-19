@@ -4,51 +4,52 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion> <!-- version dial xml that we are working with-->
 
-    <groupId>com.wegrow</groupId>
-    <artifactId>WeGrow</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
 
-    <properties>
+    <groupId>com.wegrow</groupId> <!-- hadi to mark with group or organisation the project belongs to  -->
+    <artifactId>WeGrow</artifactId>  <!-- the name of my maven project-->
+  <version>1.0-SNAPSHOT</version> <!--  hadi version dial lprojet fach ghandiro update ghanzido fiha bhale 1.0 1.1 etc -->
+    <packaging>war</packaging> <!--on precise what maven would generate wach jar wla war , in this case war cuz its a web app-->
+
+    <properties> <!--its where we defines the versions of each librairy the project is needing to execute this later with it -->
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <spring.version>6.2.19</spring.version>
         <spring-data-jpa.version>3.5.13</spring-data-jpa.version>
         <hibernate.version>6.6.39.Final</hibernate.version>
     </properties>
 
-    <dependencies>
+    <!--the dif between properties and dependencies , in the first one we put the versions and in the second we put what we need as librairies-->
+    <dependencies> <!--its where we define the libraries again-->
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <artifactId>spring-context</artifactId> <!--the one that manages the beans of the app ,creates , injects and links them together-->
             <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
+            <artifactId>spring-webmvc</artifactId> <!--allows us to work on web aps and rest apis with the mvc structure-->
             <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
+            <artifactId>spring-orm</artifactId> <!--we link spring with orm frameworks comme hibernate to use it in the interactions with db-->
             <version>${spring.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>${spring-data-jpa.version}</version>
+        <dependency> <!--we declare that we need this dependency-->
+            <groupId>org.springframework.data</groupId> <!--we declare what organisation this later belongs to-->
+            <artifactId>spring-data-jpa</artifactId> <!--librairy name-->
+            <version>${spring-data-jpa.version}</version> <!--version of the librairy-->
         </dependency>
 
         <dependency>
             <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-core</artifactId>
+            <artifactId>hibernate-core</artifactId> <!--hia what hibernate does o safe as java provider-->
             <version>${hibernate.version}</version>
         </dependency>
 
@@ -75,35 +76,35 @@
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>6.0.0</version>
-            <scope>provided</scope>
+            <scope>provided</scope> <!--means this librairy should be existing already to use it f compilation -->
         </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <artifactId>junit-jupiter</artifactId> <!--librairy uses of the tests-->
             <version>5.12.2</version>
             <scope>test</scope>
         </dependency>
 
     </dependencies>
 
-    <build>
+    <build> <!--the process where maven prepares the project : compiles java code , runs the tests , and regroupes  the files in one the artifact file .war wla jar-->
         <finalName>WeGrow</finalName>
 
         <plugins>
 
-            <plugin>
+            <plugin> <!--outils specifique that maven needs to executes some tasks in the process of the project-->
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-compiler-plugin</artifactId> <!--compiles the java code-->
                 <version>3.13.0</version>
                 <configuration>
-                    <release>17</release>
+                    <release>17</release> <!--version java -->
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
+                <artifactId>maven-war-plugin</artifactId> <!--groups the files in one artifact file-->
                 <version>3.4.0</version>
             </plugin>
 
