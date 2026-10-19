@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion> <!-- version dial xml that we are working with-->
+    <modelVersion>4.0.0</modelVersion> <!-- version dial POm MODEL  that we are working with-->
 
 
     <groupId>com.wegrow</groupId> <!-- hadi to mark with group or organisation the project belongs to  -->
@@ -76,7 +76,7 @@
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>6.0.0</version>
-            <scope>provided</scope> <!--means this librairy should be existing already to use it f compilation -->
+            <scope>provided</scope> <!--means  already exists in the runtime environnement no need to package it again  in war  -->
         </dependency>
 
         <dependency>
