@@ -60,6 +60,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public void delete(Long id) {
-
+        if (!employeeRepository.existsById(id)){
+            throw new RuntimeException("makaynch");
+        }
+         employeeRepository.deleteById(id);
     }
 }
