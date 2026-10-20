@@ -4,6 +4,8 @@ import com.wegrow.model.Departement;
 import com.wegrow.model.Employee;
 import com.wegrow.repository.DepartementRepository;
 import com.wegrow.repository.EmployeeRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -20,10 +22,12 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public Employee create(Employee employee, Long departmentId) {
         if(employeeRepository.existsByMatricule(employee.getMatricule())){
-            throw new RuntimeException("matricule can't be duplicated");
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "An employee with matricule '" + employee.getMatricule() + "' already exists");
         }
         Departement department = departementRepository.findById(departmentId)
-                .orElseThrow(() -> new RuntimeException("department doesn't exist"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Department " + departmentId + " does not exist"));
         employee.setDepartement(department);
         return employeeRepository.save(employee);
     }
@@ -32,22 +36,26 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public List<Employee> getAll(Long departmentId) {
          if(!departementRepository.existsById(departmentId)){
-             throw new RuntimeException("Department doesn't exist");
+             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                     "Department " + departmentId + " does not exist");
          }
          return employeeRepository.findByDepartement_Id(departmentId);
     }
 
     @Override
     public Employee update(Employee employee, Long departmentId) {
-       Employee existingEmployee = employeeRepository.findById(employee.getId())
-               .orElseThrow(() -> new RuntimeException("employee doesnt exist"));
+        Employee existingEmployee = employeeRepository.findById(employee.getId())
+               .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                       "Employee " + employee.getId() + " does not exist"));
 
         if(employeeRepository.existsByMatriculeAndIdNot(employee.getMatricule() , employee.getId())){
-            throw new RuntimeException("Matricule already exists");
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "An employee with matricule '" + employee.getMatricule() + "' already exists");
         }
 
         Departement department = departementRepository.findById(departmentId)
-                .orElseThrow(() -> new RuntimeException("makanach depart"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Department " + departmentId + " does not exist"));
 
         existingEmployee.setFirstName(employee.getFirstName());
         existingEmployee.setLastName(employee.getLastName());
@@ -61,7 +69,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public void delete(Long id) {
         if (!employeeRepository.existsById(id)){
-            throw new RuntimeException("empl makaynch");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Employee " + id + " does not exist");
         }
          employeeRepository.deleteById(id);
     }

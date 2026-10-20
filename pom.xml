@@ -47,6 +47,13 @@
             <version>${spring-data-jpa.version}</version> <!--version of the librairy-->
         </dependency>
 
+        <!-- Required by Spring Data's SimpleEntityPathResolver at runtime. -->
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-core</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId> <!--hia what hibernate does o safe as java provider-->

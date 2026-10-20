@@ -2,15 +2,20 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="
            http://www.springframework.org/schema/beans
            https://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           https://www.springframework.org/schema/context/spring-context.xsd
            http://www.springframework.org/schema/tx
            https://www.springframework.org/schema/tx/spring-tx.xsd
            http://www.springframework.org/schema/data/jpa
            https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <context:annotation-config/>
 
     <bean id="dataSource"
           class="org.apache.commons.dbcp2.BasicDataSource">
@@ -23,7 +28,7 @@
 
         <property name="username" value="postgres"/>
 
-        <property name="password" value="pgresql"/>
+        <property name="password" value="pgres"/>
 
     </bean>
 
@@ -61,6 +66,12 @@
 
     <tx:annotation-driven
             transaction-manager="transactionManager"/>
+
+    <!-- Supply Spring Data's default resolver explicitly for XML repository setup. -->
+    <bean id="entityPathResolver"
+          class="org.springframework.data.querydsl.SimpleEntityPathResolver">
+        <constructor-arg value=""/>
+    </bean>
 
 
     <jpa:repositories

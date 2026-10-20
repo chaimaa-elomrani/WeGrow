@@ -20,23 +20,23 @@ public class EmployeeController {
 
 
     @GetMapping("/department/{departmentId}")
-    public ResponseEntity<List<Employee>>getAll(@PathVariable Long departmentId){
+    public ResponseEntity<List<Employee>>getAll(@PathVariable("departmentId") Long departmentId){
         return ResponseEntity.ok(employeeService.getAll(departmentId));
     }
 
     @PostMapping("/department/{departmentId}")
-    public ResponseEntity<Employee> create(@RequestBody Employee employee, @PathVariable Long departmentId){
+    public ResponseEntity<Employee> create(@RequestBody Employee employee, @PathVariable("departmentId") Long departmentId){
         Employee createdEmpl = employeeService.create(employee, departmentId);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdEmpl);    }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id){
         employeeService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/department/{departmentId}")
-    public ResponseEntity<Employee> update(@RequestBody Employee employee , @PathVariable Long departmentId, @PathVariable Long id){
+    public ResponseEntity<Employee> update(@RequestBody Employee employee , @PathVariable("departmentId") Long departmentId, @PathVariable("id") Long id){
         employee.setId(id);
         Employee updateEmployee = employeeService.update(employee, departmentId);
         return ResponseEntity.ok(updateEmployee);
