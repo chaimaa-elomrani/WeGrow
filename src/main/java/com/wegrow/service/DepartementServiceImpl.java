@@ -3,6 +3,8 @@ package com.wegrow.service;
 import com.wegrow.model.Departement;
 import com.wegrow.repository.DepartementRepository;
 import com.wegrow.repository.EmployeeRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -37,10 +39,12 @@ public class DepartementServiceImpl implements DepartementService{
     @Override
     public void delete(Long id) {
         if(!departementRepository.existsById(id)){
-            throw new RuntimeException("departement not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Department " + id + " does not exist");
         }
         if(employeeRepository.countByDepartement_Id(id) > 0){
-            throw new RuntimeException("Cannot delete a department that has employees");
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Cannot delete department " + id + " because it has employees");
         }
         departementRepository.deleteById(id);
     }

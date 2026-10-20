@@ -31,7 +31,7 @@ public class DepartementController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id){
         departementService.delete(id);
         return ResponseEntity.noContent().build(); // in this line the noCOntent returns response 204 indicating that the operation succeed without returning data
     }
